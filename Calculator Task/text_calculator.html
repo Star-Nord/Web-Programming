@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        #calculator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #calculator input {
+            padding: 5px;
+            font-size: 16px;
+        }
+        #calculator p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <p>Enter the operands and operator and the script will automatically perform the calculation</p>
+    <div id="calculator">
+        <input type="text" id="number1" placeholder="Enter first number">
+        <input type="text" id="operator" placeholder="Enter operator">
+        <input type="text" id="number2" placeholder="Enter second number">
+        <p>=</p>
+        <p id="result"></p>
+    </div>
+    <p>The operators are <b>+</b>(addition), <b>-</b>(subtraction), <b>*</b>(multiplication), and <b>/</b>(division).</p>
+    <script>
+        var number1Input = document.getElementById('number1');
+        var operatorInput = document.getElementById('operator');
+        var number2Input = document.getElementById('number2');
+        var resultDisplay = document.getElementById('result');
+
+        function calculate() {
+            var num1 = parseFloat(number1Input.value);
+            var operator = operatorInput.value.trim();
+            var num2 = parseFloat(number2Input.value);
+
+            let result;
+            if (isNaN(num1) && isNaN(num2)) {
+                resultDisplay.textContent = 'Please enter a valid float in both number boxes';
+                return;
+            }
+            else if (isNaN(num1)) {
+                resultDisplay.textContent = 'Please enter a valid float in the first number box';
+                return;
+            }
+            else if (isNaN(num2)) {
+                resultDisplay.textContent = 'Please enter a valid float in the second number box';
+                return;
+            }
+            else if (operator === '+') {
+                result = num1 + num2;
+            }
+            else if (operator === '-') {
+                result = num1 - num2;
+            }
+            else if (operator === '*') {
+                result = num1 * num2;
+            }
+            else if (operator === '/') {
+                result = num1 / num2;
+            }
+            else {
+                result = 'Please enter a valid operator';
+            }
+
+            resultDisplay.textContent = result;
+        }
+
+        number1Input.addEventListener('input', calculate);
+        operatorInput.addEventListener('input', calculate);
+        number2Input.addEventListener('input', calculate);
+    </script>
+</body>
+</html>
